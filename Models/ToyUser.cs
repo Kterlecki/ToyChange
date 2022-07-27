@@ -2,7 +2,7 @@
 
 namespace ToyChange.Models
 {
-    public class ToyUser : IdentityUser
+    public class User : IdentityUser
     {
     }
 }
