@@ -25,7 +25,7 @@ jobs:
         - name: step one
           uses: actions/checkout@v2
         - name: step two
-          run: Get-Date
+          run: date
           
   depends:
     name: fourth job
