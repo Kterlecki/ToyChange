@@ -75,12 +75,19 @@ namespace ToyChange.Controllers
         {
             _registerVM.ReturnUrl = _returnUrl;
             _returnUrl = _returnUrl ?? Url.Content("~/");
+
+            var user = await userManager.FindByEmailAsync(_registerVM.EmailAddress);
+            if(user != null)
+            {
+                ModelState.AddModelError("EmailAddress", "Email address already in use");
+                return View(_registerVM);
+            }
             if(ModelState.IsValid)
             {
-                var user = new User { UserName = _registerVM.UserName, Email = _registerVM.EmailAddress };
-                //_returnUrl = _returnUrl ?? Url.Action("Index", "Home");
+                var newUser = new User { UserName = _registerVM.UserName, Email = _registerVM.EmailAddress };
+                
                 _returnUrl = _returnUrl ?? Url.Content("~/");
-                var RegisterResult = await userManager.CreateAsync(user, _registerVM.Password);
+                var RegisterResult = await userManager.CreateAsync(newUser, _registerVM.Password);
                 if (RegisterResult.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
