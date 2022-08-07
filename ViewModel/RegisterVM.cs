@@ -4,7 +4,12 @@ namespace ToyChange.ViewModel
 {
     public class RegisterVM
     {
-        
+
+        [EmailAddress]
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Email is Needed")]
+        public string EmailAddress { get; set; }
+
         [Display(Name = "Username")]
         [Required(ErrorMessage = "Username must be entered")]
         public string UserName { get; set; }
@@ -13,10 +18,7 @@ namespace ToyChange.ViewModel
         [Required(ErrorMessage = "Full name must be entered")]
         public string FullName { get; set; }
 
-        [EmailAddress]
-        [Display(Name = "Email")]
-        [Required(ErrorMessage = "Email is Needed")]
-        public string EmailAddress { get; set; }
+        
 
         [Required]
         [DataType(DataType.Password)]
