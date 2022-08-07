@@ -19,6 +19,8 @@ namespace ToyChange.Controllers
         {
             return View();
         }
+
+        
         [HttpGet]
         public IActionResult Login(string _returnUrl = null)
         {
@@ -32,21 +34,25 @@ namespace ToyChange.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVM loginVM, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+                var user = await userManager.FindByEmailAsync(loginVM.EmailAddress);
+                if (user != null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    var passwordVerification = await userManager.CheckPasswordAsync(user,loginVM.Password);
+                    if (passwordVerification)
+                    {
+                        await signInManager.SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");   
+                    } 
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Login attempt failed");
-                    return View(loginVM);
-                }
+                
             }
             return View(loginVM);
         }
+        
+
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -68,13 +74,20 @@ namespace ToyChange.Controllers
         public async Task<ActionResult> Register(RegisterVM _registerVM, string? _returnUrl=null)
         {
             _registerVM.ReturnUrl = _returnUrl;
+            _returnUrl = _returnUrl ?? Url.Content("~/");
 
+            var user = await userManager.FindByEmailAsync(_registerVM.EmailAddress);
+            if(user != null)
+            {
+                ModelState.AddModelError("EmailAddress", "Email address already in use");
+                return View(_registerVM);
+            }
             if(ModelState.IsValid)
             {
-                var user = new User { UserName = _registerVM.UserName, Email = _registerVM.EmailAddress};
-                //_returnUrl = _returnUrl ?? Url.Action("Index", "Home");
+                var newUser = new User { UserName = _registerVM.UserName, Email = _registerVM.EmailAddress };
+                
                 _returnUrl = _returnUrl ?? Url.Content("~/");
-                var RegisterResult = await userManager.CreateAsync(user, _registerVM.Password);
+                var RegisterResult = await userManager.CreateAsync(newUser, _registerVM.Password);
                 if (RegisterResult.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);

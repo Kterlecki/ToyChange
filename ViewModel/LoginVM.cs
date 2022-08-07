@@ -4,9 +4,13 @@ namespace ToyChange.ViewModel
 {
     public class LoginVM
     {
-        [Display(Name = "User Name")]
-        [Required(ErrorMessage = "User Name is Needed")]
-        public string UserName { get; set; }
+        [EmailAddress]
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Email is Needed")]
+        public string EmailAddress { get; set; }
+        //[Display(Name = "User Name")]
+        //[Required(ErrorMessage = "User Name is Needed")]
+        //public string UserName { get; set; }
 
         
         [Required]
@@ -16,5 +20,7 @@ namespace ToyChange.ViewModel
 
         public string? ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
+        
+        
     }
 }
