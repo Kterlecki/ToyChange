@@ -25,6 +25,7 @@ namespace ToyChange.Models
 
 
         //Navigation properties
+        
         public string Id { get; set; }
         public virtual User User { get; set; }
     }

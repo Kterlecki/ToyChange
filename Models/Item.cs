@@ -29,10 +29,12 @@ namespace ToyChange.Models
 
 
         //Navigation properties
+        //[ForeignKey("Id")]
         public string Id { get; set; }
         public virtual User User { get; set; }
-
+        
         public int OrderId { get; set; }
+        //[ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
 
 
