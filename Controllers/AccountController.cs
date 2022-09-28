@@ -90,7 +90,7 @@ namespace ToyChange.Controllers
                 var RegisterResult = await userManager.CreateAsync(newUser, _registerVM.Password);
                 if (RegisterResult.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
+                    await signInManager.SignInAsync(newUser, isPersistent: false);
                     return LocalRedirect(_returnUrl); /// check if you can use a different redirect
                 }
 

@@ -17,6 +17,7 @@ namespace ToyChange.Controllers
         public OrdersController(ApplicationDbContext context)
         {
             _context = context;
+            _context.Database.EnsureCreated();
         }
 
         // GET: Orders

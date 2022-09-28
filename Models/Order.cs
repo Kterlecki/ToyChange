@@ -23,7 +23,7 @@ namespace ToyChange.Models
         //Navigation properties
         
         public string Id { get; set; }
-        //[ForeignKey("Id")]
+        [ForeignKey("Id")]
         public virtual User User { get; set; }
 
         
