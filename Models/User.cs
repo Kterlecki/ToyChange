@@ -12,7 +12,7 @@ namespace ToyChange.Models
 
         //Navigation properties
         
-        public virtual ICollection<Item> Item { get; set; }
+        
 
         
         public virtual ICollection<Order> Order { get; set; }
