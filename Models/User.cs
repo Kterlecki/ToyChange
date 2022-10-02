@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToyChange.Models
 {
@@ -11,13 +10,13 @@ namespace ToyChange.Models
 
 
         //Navigation properties
-        
-        
 
-        
+
+
+
         public virtual ICollection<Order> Order { get; set; }
-        
-        
+
+
         public virtual ICollection<BlogPost> BlogPost { get; set; }
     }
 }

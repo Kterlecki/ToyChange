@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 using ToyChange.Data.Enums;
 
 namespace ToyChange.Models
@@ -17,7 +15,7 @@ namespace ToyChange.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = ("Price required"))]
-        [Display(Name =("Price $"))]
+        [Display(Name = ("Price $"))]
         public float Price { get; set; }
 
         [Required(ErrorMessage = ("Image Url required"))]
@@ -29,8 +27,8 @@ namespace ToyChange.Models
 
 
         //Navigation properties
-         
-      
+
+
         public virtual Order Order { get; set; }
 
 

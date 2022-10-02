@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ToyChange.ViewModel;
 using ToyChange.Models;
+using ToyChange.ViewModel;
 
 namespace ToyChange.Controllers
 {
@@ -20,11 +20,11 @@ namespace ToyChange.Controllers
             return View();
         }
 
-        
+
         [HttpGet]
         public IActionResult Login(string _returnUrl = null)
         {
-            LoginVM loginVM = new LoginVM(); 
+            LoginVM loginVM = new LoginVM();
             loginVM.ReturnUrl = _returnUrl ?? Url.Content("~/"); // If returnURL is null return the base URL
 
             return View(loginVM);
@@ -39,20 +39,20 @@ namespace ToyChange.Controllers
                 var user = await userManager.FindByEmailAsync(loginVM.EmailAddress);
                 if (user != null)
                 {
-                    var passwordVerification = await userManager.CheckPasswordAsync(user,loginVM.Password);
+                    var passwordVerification = await userManager.CheckPasswordAsync(user, loginVM.Password);
                     if (passwordVerification)
                     {
                         await signInManager.SignInAsync(user, isPersistent: false);
-                        return RedirectToAction("Index", "Home");   
-                    } 
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-                
+
             }
             return View(loginVM);
         }
-        
 
-        
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -62,30 +62,30 @@ namespace ToyChange.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<ActionResult> Register(string? _returnUrl= null)
+        public async Task<ActionResult> Register(string? _returnUrl = null)
         {
             RegisterVM registerVM = new RegisterVM();
-            registerVM.ReturnUrl = _returnUrl;  
+            registerVM.ReturnUrl = _returnUrl;
             return View(registerVM);
         }
 
 
         [HttpPost]
-        public async Task<ActionResult> Register(RegisterVM _registerVM, string? _returnUrl=null)
+        public async Task<ActionResult> Register(RegisterVM _registerVM, string? _returnUrl = null)
         {
             _registerVM.ReturnUrl = _returnUrl;
             _returnUrl = _returnUrl ?? Url.Content("~/");
 
             var user = await userManager.FindByEmailAsync(_registerVM.EmailAddress);
-            if(user != null)
+            if (user != null)
             {
                 ModelState.AddModelError("EmailAddress", "Email address already in use");
                 return View(_registerVM);
             }
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var newUser = new User { UserName = _registerVM.UserName, Email = _registerVM.EmailAddress };
-                
+
                 _returnUrl = _returnUrl ?? Url.Content("~/");
                 var RegisterResult = await userManager.CreateAsync(newUser, _registerVM.Password);
                 if (RegisterResult.Succeeded)

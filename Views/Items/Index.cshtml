@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Items</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -50,7 +50,10 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                @*@Html.DisplayFor(modelItem => item.ImageUrl)*@
+                <div class="col-md-12">
+                    <img src="@item.ImageUrl" width="100" alt="Error">
+                </div>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ItemCategory)

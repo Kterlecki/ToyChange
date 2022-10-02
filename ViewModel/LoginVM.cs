@@ -12,7 +12,7 @@ namespace ToyChange.ViewModel
         //[Required(ErrorMessage = "User Name is Needed")]
         //public string UserName { get; set; }
 
-        
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -20,7 +20,7 @@ namespace ToyChange.ViewModel
 
         public string? ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
-        
-        
+
+
     }
 }

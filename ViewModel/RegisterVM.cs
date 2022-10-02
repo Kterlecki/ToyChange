@@ -18,7 +18,7 @@ namespace ToyChange.ViewModel
         [Required(ErrorMessage = "Full name must be entered")]
         public string FullName { get; set; }
 
-        
+
 
         [Required]
         [DataType(DataType.Password)]
