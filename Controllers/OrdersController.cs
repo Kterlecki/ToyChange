@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ToyChange.Data;
@@ -23,7 +19,7 @@ namespace ToyChange.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Order.Include(o => o.Item);
+            var applicationDbContext = _context.Order.Include(o => o.Item).Include(o => o.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,6 +33,7 @@ namespace ToyChange.Controllers
 
             var order = await _context.Order
                 .Include(o => o.Item)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {
@@ -49,7 +46,8 @@ namespace ToyChange.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description");
+            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Title");
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Email");
             return View();
         }
 
@@ -67,6 +65,7 @@ namespace ToyChange.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Id", order.Id);
             return View(order);
         }
 
@@ -84,6 +83,7 @@ namespace ToyChange.Controllers
                 return NotFound();
             }
             ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Email", order.Id);
             return View(order);
         }
 
@@ -120,6 +120,7 @@ namespace ToyChange.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Email", order.Id);
             return View(order);
         }
 
@@ -133,6 +134,7 @@ namespace ToyChange.Controllers
 
             var order = await _context.Order
                 .Include(o => o.Item)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {
@@ -156,14 +158,14 @@ namespace ToyChange.Controllers
             {
                 _context.Order.Remove(order);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrderExists(int id)
         {
-          return _context.Order.Any(e => e.OrderId == id);
+            return _context.Order.Any(e => e.OrderId == id);
         }
     }
 }

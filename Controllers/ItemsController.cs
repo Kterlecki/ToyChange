@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToyChange.Data;
 using ToyChange.Models;
@@ -23,7 +18,7 @@ namespace ToyChange.Controllers
         // GET: Items
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Item.ToListAsync());
+            return View(await _context.Item.ToListAsync());
         }
 
         // GET: Items/Details/5
@@ -149,14 +144,14 @@ namespace ToyChange.Controllers
             {
                 _context.Item.Remove(item);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ItemExists(int id)
         {
-          return _context.Item.Any(e => e.ItemId == id);
+            return _context.Item.Any(e => e.ItemId == id);
         }
     }
 }

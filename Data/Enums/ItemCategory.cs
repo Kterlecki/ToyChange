@@ -6,7 +6,7 @@ namespace ToyChange.Data.Enums
     {
         Technic,
         [Display(Name = "Jurassic World")]
-        Jurassic_World, 
+        Jurassic_World,
         City,
         Ninjago
     }
