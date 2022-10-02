@@ -46,7 +46,7 @@ namespace ToyChange.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description");
+            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Title");
             ViewData["Id"] = new SelectList(_context.User, "Id", "Email");
             return View();
         }
@@ -65,7 +65,7 @@ namespace ToyChange.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
-            ViewData["Id"] = new SelectList(_context.User, "Id", "Email", order.Id);
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Id", order.Id);
             return View(order);
         }
 
