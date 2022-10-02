@@ -19,7 +19,7 @@ namespace ToyChange.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Order.Include(o => o.Item);
+            var applicationDbContext = _context.Order.Include(o => o.Item).Include(o => o.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -33,6 +33,7 @@ namespace ToyChange.Controllers
 
             var order = await _context.Order
                 .Include(o => o.Item)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {
@@ -46,6 +47,7 @@ namespace ToyChange.Controllers
         public IActionResult Create()
         {
             ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description");
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Email");
             return View();
         }
 
@@ -63,6 +65,7 @@ namespace ToyChange.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Email", order.Id);
             return View(order);
         }
 
@@ -80,6 +83,7 @@ namespace ToyChange.Controllers
                 return NotFound();
             }
             ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Email", order.Id);
             return View(order);
         }
 
@@ -116,6 +120,7 @@ namespace ToyChange.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Email", order.Id);
             return View(order);
         }
 
@@ -129,6 +134,7 @@ namespace ToyChange.Controllers
 
             var order = await _context.Order
                 .Include(o => o.Item)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {
