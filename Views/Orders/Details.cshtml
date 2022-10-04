@@ -18,17 +18,30 @@
             @Html.DisplayFor(model => model.OrderDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.User.Email)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.User.Email)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Item)
+            @Html.DisplayNameFor(model => model.Item.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Item.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.Description)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Item.Description)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.ImageUrl)
+        </dt>
+        <dd class = "col-sm-10">
+            <div class="col-md-12">
+                <img src="@Model.Item.ImageUrl" width="100" alt="Error">
+            </div>
     </dl>
 </div>
 <div>
