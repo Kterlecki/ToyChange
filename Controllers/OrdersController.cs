@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ToyChange.Data;
@@ -64,8 +68,8 @@ namespace ToyChange.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
-            ViewData["Id"] = new SelectList(_context.User, "Id", "Id", order.Id);
+            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Title", order.ItemId);
+            ViewData["Id"] = new SelectList(_context.User, "Id", "Email", order.Id);
             return View(order);
         }
 
@@ -82,7 +86,7 @@ namespace ToyChange.Controllers
             {
                 return NotFound();
             }
-            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
+            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Title", order.ItemId);
             ViewData["Id"] = new SelectList(_context.User, "Id", "Email", order.Id);
             return View(order);
         }
@@ -119,7 +123,7 @@ namespace ToyChange.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Description", order.ItemId);
+            ViewData["ItemId"] = new SelectList(_context.Item, "ItemId", "Title", order.ItemId);
             ViewData["Id"] = new SelectList(_context.User, "Id", "Email", order.Id);
             return View(order);
         }
@@ -158,14 +162,14 @@ namespace ToyChange.Controllers
             {
                 _context.Order.Remove(order);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrderExists(int id)
         {
-            return _context.Order.Any(e => e.OrderId == id);
+          return _context.Order.Any(e => e.OrderId == id);
         }
     }
 }
