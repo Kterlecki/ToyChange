@@ -9,17 +9,72 @@ namespace ToyChange.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+
+        //private static ShoppingCart cart = new ShoppingCart();
+
+        //public ActionResult AddToCart(int ItemId)
+        //{
+        //    Item item = _context.Item.FirstOrDefault(x => x.ItemId == ItemId);
+        //    if (item != null)
+        //    {
+        //        cart.AddItem(item);
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+
+
         public ItemsController(ApplicationDbContext context)
         {
             _context = context;
             _context.Database.EnsureCreated();
         }
 
-        // GET: Items
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            return View(await _context.Item.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["EmailSortParm"] = sortOrder == "Price" ? "Price_desc" : "Price";
+            ViewData["CurrentFilter"] = searchString;
+
+            var items = from i in _context.Item
+                        select i;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                items = items.Where(i => i.Title.ToLower().Contains(searchString.ToLower()));
+            }
+
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    items = items.OrderByDescending(i => i.Title);
+                    break;
+                case "Price":
+                    items = items.OrderBy(u => u.Price);
+                    break;
+                case "Price_desc":
+                    items = items.OrderByDescending(u => u.Price);
+                    break;
+                default:
+                    items = items.OrderBy(i => i.ItemId);
+                    break;
+            }
+            return View(await items.AsNoTracking().ToListAsync());
         }
+
+
+
+        // GET: Products
+        //public ActionResult CartView()
+        //{
+        //    return View(cart);
+        //}
+
+        // GET: Items
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.Item.ToListAsync());
+        //}
 
         // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
