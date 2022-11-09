@@ -1,5 +1,7 @@
+using System.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using ToyChange.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,18 +43,36 @@ else
     app.UseHsts();
 }
 
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
+
+
+
+
+
+
 app.UseSession();
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
+app.UseCors();
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "Areas",
+    pattern: "{area:exists}/{controller=Products}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "stripeCart",
+    pattern: "{controller=Cart}/{action=Create}/{id}");
+
 app.MapRazorPages();
 
 app.Run();
