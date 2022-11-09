@@ -23,6 +23,7 @@ namespace ToyChange.Data
         public DbSet<Item> Item { get; set; }
         public DbSet<BlogPost> BlogPost { get; set; }
 
+        //public DbSet<Item> ShoppingCartItems { get; set; }
 
 
     }
