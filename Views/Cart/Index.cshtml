@@ -25,7 +25,7 @@
         </div>
         <div>@item.Price.ToString("C2")</div>
         <div>@Model.CartItems.Where(x => x.ProductId ==item.ProductId).Sum(x =>x.Quantity*x.Price).ToString("C2")</div>
-        <form id="payment-form" method="post" asp-controller="Cart" asp-action="Create">
+        <form id="payment-form" method="post" asp-controller="Cart" asp-action="Create" asp-route-id="@item.ProductId">
             <script src="https://checkout.stripe.com/checkout.js"
             class="stripe-button"
             data-key="pk_test_51LqkIjJJFpBUvCYhZPFZs4C0oZTCywEROxauqy68c6obacmNVcxuQXGnBa80pKfPdVZUJyiFMCTfgcZUn2ehjm7R00AeYrPr1h"
