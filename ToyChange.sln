@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyChange", "ToyChange.csproj", "{48277954-1C75-4086-BFC6-C54F2909F996}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyChange", "ToyChange.csproj", "{48277954-1C75-4086-BFC6-C54F2909F996}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

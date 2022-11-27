@@ -9,17 +9,17 @@ using ToyChange.Data;
 
 #nullable disable
 
-namespace ToyChange.Data.Migrations
+namespace ToyChange.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220820165645_new-models")]
-    partial class newmodels
+    [Migration("20221002195636_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -277,17 +277,11 @@ namespace ToyChange.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ItemCategory")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<float>("Price")
@@ -297,12 +291,7 @@ namespace ToyChange.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ItemId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Item");
                 });
@@ -316,7 +305,7 @@ namespace ToyChange.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
@@ -324,15 +313,12 @@ namespace ToyChange.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("OrderId");
+
+                    b.HasIndex("Id");
 
                     b.HasIndex("ItemId")
                         .IsUnique();
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Order");
                 });
@@ -404,26 +390,17 @@ namespace ToyChange.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ToyChange.Models.Item", b =>
-                {
-                    b.HasOne("ToyChange.Models.User", "User")
-                        .WithMany("Item")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ToyChange.Models.Order", b =>
                 {
+                    b.HasOne("ToyChange.Models.User", "User")
+                        .WithMany("Order")
+                        .HasForeignKey("Id");
+
                     b.HasOne("ToyChange.Models.Item", "Item")
                         .WithOne("Order")
                         .HasForeignKey("ToyChange.Models.Order", "ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("ToyChange.Models.User", "User")
-                        .WithMany("Order")
-                        .HasForeignKey("UserId");
 
                     b.Navigation("Item");
 
@@ -438,8 +415,6 @@ namespace ToyChange.Data.Migrations
             modelBuilder.Entity("ToyChange.Models.User", b =>
                 {
                     b.Navigation("BlogPost");
-
-                    b.Navigation("Item");
 
                     b.Navigation("Order");
                 });
