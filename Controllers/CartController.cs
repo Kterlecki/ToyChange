@@ -107,7 +107,7 @@ namespace ToyChange.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string stripeToken, long id)
+        public async Task<IActionResult> Create(string stripeToken, [FromRoute]long id)
         {
             List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
             CartItem cartItem = cart.FirstOrDefault(c => c.ProductId == id);

@@ -10,19 +10,6 @@ namespace ToyChange.Controllers
         private readonly ApplicationDbContext _context;
 
 
-        //private static ShoppingCart cart = new ShoppingCart();
-
-        //public ActionResult AddToCart(int ItemId)
-        //{
-        //    Item item = _context.Item.FirstOrDefault(x => x.ItemId == ItemId);
-        //    if (item != null)
-        //    {
-        //        cart.AddItem(item);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
-
-
         public ItemsController(ApplicationDbContext context)
         {
             _context = context;
