@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyChange", "ToyChange.csproj", "{48277954-1C75-4086-BFC6-C54F2909F996}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyChange.Tests", "..\ToyChange.Tests\ToyChange.Tests.csproj", "{DAC0C8B9-C67A-48B2-B90C-9A1949BD77F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{48277954-1C75-4086-BFC6-C54F2909F996}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48277954-1C75-4086-BFC6-C54F2909F996}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48277954-1C75-4086-BFC6-C54F2909F996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC0C8B9-C67A-48B2-B90C-9A1949BD77F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC0C8B9-C67A-48B2-B90C-9A1949BD77F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC0C8B9-C67A-48B2-B90C-9A1949BD77F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC0C8B9-C67A-48B2-B90C-9A1949BD77F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
