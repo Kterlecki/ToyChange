@@ -81,23 +81,23 @@ namespace ToyChange.Tests.ControllersTest
         [Fact]
         public async Task CartAdd_Cart_ReturnsNotFoundAsync()
         {
-            //Act
+            ////Act
             
-            var mockDb = GetDbContext();
+            //var mockDb = GetDbContext();
             
-            var cartController = new CartController(mockDb);
+            //var cartController = new CartController(mockDb);
 
-            //Arrange
+            ////Arrange
             
 
-            var cartResult = await cartController.Add(50);
-            //StatusCodeResult result = cartController.Add(50);
-            TaskStatus status = TaskStatus.Faulted;
+            //var cartResult = await cartController.Add(50);
+            ////StatusCodeResult result = cartController.Add(50);
+            //TaskStatus status = TaskStatus.Faulted;
 
-            ////Assert
-            ////Assert.Null(cartResult);
-            //Assert.Equal(cartResult, TaskStatus.Faulted);
-            //Assert.IsType<TaskStatus(Failure)>(cartResult);
+            //////Assert
+            //////Assert.Null(cartResult);
+            ////Assert.Equal(cartResult, TaskStatus.Faulted);
+            ////Assert.IsType<TaskStatus(Failure)>(cartResult);
 
 
         }
