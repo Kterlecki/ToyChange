@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\test\ToyChange.Tests.csproj" />
   </ItemGroup>
 
 </Project>
