@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ToyChange.Models.BlogPost>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Blog Posts</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogContent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogImageUrl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.BlogId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.BlogId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.BlogId">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                       
+                        <a asp-action="Details" asp-route-id="@item.BlogId">Details</a> 
+                        
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
