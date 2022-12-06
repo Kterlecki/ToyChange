@@ -44,7 +44,7 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Kterlecki_ToyChange" /o:"kterlecki" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build --no-incremental
-          coverlet .\ToyChange.Tests\bin\Debug\net6.0\ToyChange.Tests.dll
+          coverlet .\test\bin\Debug\net6.0\ToyChange.Tests.dll
            --target "dotnet" 
            --targetargs "test --no-build"
            -f=opencover 
