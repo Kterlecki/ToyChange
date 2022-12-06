@@ -10,61 +10,45 @@
 <h1>Blog Posts</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-action="Create">Create New</a>
+    }
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BlogTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BlogContent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BlogImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+
+<dl class="row">
+    @foreach (var item in Model)
+    {
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BlogTitle)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(modelItem => item.BlogTitle)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BlogContent)</dt>
+        <dd class="col-sm-9">
+            <p>@Html.DisplayFor(modelItem => item.BlogContent)</p>
+        </dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BlogImageUrl)</dt>
+        <dd class="col-sm-9">
+            <img class="img-fluid rounded mx-auto d-block" src="@item.BlogImageUrl" alt="Error">
+        </dd>
+
+
+
+        @if (SignInManager.IsSignedIn(User))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BlogTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BlogContent)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BlogImageUrl)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.BlogId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.BlogId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.BlogId">Delete</a>
-                    </td>
-                }
-                else
-                {
-                    <td>
-                       
-                        <a asp-action="Details" asp-route-id="@item.BlogId">Details</a> 
-                        
-                    </td>
-                }
-
-            </tr>
+            <dt class="col-sm-3">
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.BlogId">Edit</a>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.BlogId">Details</a>
+                <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.BlogId">Delete</a>
+            </dt>
         }
-    </tbody>
-</table>
+        
+        <div class="container">
+            <p>-------------------------------------------------------------</p>
+        </div>
+
+
+    }
+
+
+
+</dl>

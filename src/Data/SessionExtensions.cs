@@ -2,6 +2,10 @@
 
 namespace ToyChange.Data
 {
+
+    /// <summary>
+    ///  Shopping Cart tutorial for .net 
+    /// </summary>
     public static class SessionExtensions
     {
         public static void SetJson(this ISession session, string key, object value)
