@@ -309,5 +309,20 @@ public class ItemTests
         Assert.IsAssignableFrom<RedirectToActionResult>(delete);
     }
 
+    [Fact]
+    public async Task DeleteConfirmed_Item_ReturnNotFound()
+    {
+        //Arrange
+        var mockDb = GetDbContext();
+        var controller = new ItemsController(mockDb);
+        //Act
+        var delete = await controller.Delete(200);
+
+
+        //Assert
+        Assert.NotNull(delete);
+        Assert.IsAssignableFrom<NotFoundResult>(delete);
+    }
+
 
 }
