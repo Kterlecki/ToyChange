@@ -1,0 +1,142 @@
+﻿@using ToyChange.Models.ViewModel
+@model CartViewModel
+
+@{
+    ViewData["Title"] = "Cart Overview";
+}
+
+<h1>Cart overview</h1>
+
+@if (Model.CartItems.Count > 0)
+{
+
+    @foreach (var item in Model.CartItems)
+    {
+
+
+
+        <div>@item.ProductName</div>
+        <div>@item.Quantity</div>
+        <div>
+            <a class="btn btn-primary btn-sm" asp-action="Add" asp-route-id="@item.ProductId">+</a>
+            <a class="btn btn-info btn-sm" asp-action="Decrease" asp-route-id="@item.ProductId">-</a>
+            <a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProductId">Remove</a>
+
+        </div>
+        <div>@item.Price.ToString("C2")</div>
+        <div>@Model.CartItems.Where(x => x.ProductId ==item.ProductId).Sum(x =>x.Quantity*x.Price).ToString("C2")</div>
+        <form id="payment-form" method="post" asp-controller="Cart" asp-action="Create" asp-route-id="@item.ProductId">
+            <script src="https://checkout.stripe.com/checkout.js"
+            class="stripe-button"
+            data-key="pk_test_51LqkIjJJFpBUvCYhZPFZs4C0oZTCywEROxauqy68c6obacmNVcxuQXGnBa80pKfPdVZUJyiFMCTfgcZUn2ehjm7R00AeYrPr1h"
+            data-name="ToyChange Payment"
+            data-description="@item.ProductName - @item.Price"
+            data-locale="en"
+            data-label="Pay"
+            asp-action="Create"
+            asp-route-id="@item.ProductId"
+            >
+            
+
+            </script>
+        </form>
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+@if (Model.CartItems.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+        @foreach (var item in Model.CartItems)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" asp-action="Add" asp-route-id="@item.ProductId">+</a>
+                    <a class="btn btn-info btn-sm" asp-action="Decrease" asp-route-id="@item.ProductId">-</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProductId">Remove</a>
+
+                </td>
+                <td>@item.Price.ToString("C2")</td>
+                <td>@Model.CartItems.Where(x => x.ProductId ==item.ProductId).Sum(x =>x.Quantity*x.Price).ToString("C2")</td>
+
+            </tr>
+            <form id="payment-form" method="post" asp-controller="Checkout" asp-action="Create">
+
+                <script src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="pk_test_51LqkIjJJFpBUvCYhZPFZs4C0oZTCywEROxauqy68c6obacmNVcxuQXGnBa80pKfPdVZUJyiFMCTfgcZUn2ehjm7R00AeYrPr1h"
+                data-name="ToyChange Payment"
+                data-description="@item.ProductName - @item.Price"
+                data-locale="en"
+                data-label="Pay"
+                @*asp-controller="Checkout"*@
+                asp-action="Create"
+                @*asp-route-id =*@>
+                </script>
+
+
+            </form>
+
+        }
+        <tr>
+            <td class="text right" colspan="4">Total: @Model.GrandTotal.ToString("C2")</td>
+        </tr>
+        <tr>
+            <td class="text right" colspan="4">
+                <a class="btn btn-danger" asp-action="Clear"> Clear cart</a>
+                <a class="btn btn-danger stripe-button" href="#"> Checkout</a>
+
+
+                <div>
+                    <!-- Display a payment form -->
+                <form id="payment-form">
+                        <div id="payment-element">
+                            <!--Stripe.js injects the Payment Element-->
+                    </div>
+                        <button id="submit">
+                            <div class="spinner hidden" id="spinner"></div>
+                            <span id="button-text">Pay now</span>
+                        </button>
+                        <div id="payment-message" class="hidden"></div>
+                    </form>
+                </div>
+
+                @section Scripts {
+            <script src="https://js.stripe.com/v3/"></script>
+            <script src="js/checkout.js"></script>
+
+
+            }
+
+
+
+            </td>
+        </tr>
+    </table>
+
+
+}
+else
+{
+    <h3 class="display-4 text-center">Cart is empty.</h3>
+}
+

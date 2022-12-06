@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyChange", "src\ToyChange.csproj", "{33F88278-4C13-41ED-88F9-70E2BF6F5AA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyChange.Tests", "test\ToyChange.Tests.csproj", "{18282737-76C4-44F8-A495-31C94E588646}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33F88278-4C13-41ED-88F9-70E2BF6F5AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F88278-4C13-41ED-88F9-70E2BF6F5AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F88278-4C13-41ED-88F9-70E2BF6F5AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F88278-4C13-41ED-88F9-70E2BF6F5AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18282737-76C4-44F8-A495-31C94E588646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18282737-76C4-44F8-A495-31C94E588646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18282737-76C4-44F8-A495-31C94E588646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18282737-76C4-44F8-A495-31C94E588646}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
