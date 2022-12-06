@@ -33,5 +33,7 @@
     <PackageReference Include="Stripe.net" Version="40.14.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
+	
+	
 
 </Project>
