@@ -52,6 +52,7 @@ namespace ToyChange.Tests.ControllersTest
         [Fact]
         public async Task CartAdd_Cart_ReturnsNotNull()
         { 
+
             //Act
             var item = new Item()
             {
@@ -70,7 +71,7 @@ namespace ToyChange.Tests.ControllersTest
             var result = await controller.Create(item);
 
             var cartResult = cartController.Add(10);
-            
+
 
 
             //Assert
@@ -84,13 +85,14 @@ namespace ToyChange.Tests.ControllersTest
         public async Task CartAdd_Cart_ReturnsNotFoundAsync()
         {
             ////Act
-            
+
+
             //var mockDb = GetDbContext();
-            
+
             //var cartController = new CartController(mockDb);
 
             ////Arrange
-            
+
 
             //var cartResult = await cartController.Add(50);
 
@@ -122,10 +124,12 @@ namespace ToyChange.Tests.ControllersTest
             var cartController = new CartController(mockDb);
 
             //Arrange
+
             var createItem =controller.Create(item);
 
             var cartAdd = cartController.Add(10);
             var cartRemove =  cartController.Remove(10);    
+
 
 
 
@@ -140,5 +144,7 @@ namespace ToyChange.Tests.ControllersTest
 
 
     }
+
    
 }
+
