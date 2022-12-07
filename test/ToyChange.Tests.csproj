@@ -1,3 +1,4 @@
+
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -37,10 +38,9 @@
     </PackageReference>
   </ItemGroup>
 
-	
-	
   <ItemGroup>
     <ProjectReference Include="..\src\ToyChange.csproj" />
   </ItemGroup>
 
 </Project>
+
