@@ -38,8 +38,6 @@
     </PackageReference>
   </ItemGroup>
 
-	
-	
   <ItemGroup>
     <ProjectReference Include="..\src\ToyChange.csproj" />
   </ItemGroup>
