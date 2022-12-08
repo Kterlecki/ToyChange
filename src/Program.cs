@@ -43,7 +43,7 @@ else
     app.UseHsts();
 }
 
-StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
 
 
 
