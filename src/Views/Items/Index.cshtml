@@ -90,24 +90,7 @@
     </tbody>
 </table>
 
-#############
-@foreach (var item in Model) {
-    <div class= "col-4">
-        <img src="@item.ImageUrl" class="img-fluid" alt=""/>
-        <h4>@item.Title</h4>
-        <div>
-            @Html.Raw(item.Description)
-        </div>
-        <p>
-            @item.Price.ToString("C2")
-        </p>
-        <p>
-            <a href= "#" class= "btn btn-primary ">Add to cart</a>
-        </p>
-        </div>
 
-  
-}
 
 
 
