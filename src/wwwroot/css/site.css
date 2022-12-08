@@ -16,3 +16,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.bg-image-1 {
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://images.ctfassets.net/23aumh6u8s0i/3TRYElMxIaNLqt7rXCrAG7/29560e70503c861cfe85632ecac78d03/privacy);
+}
+
+.bg-image-2 {
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://media.gettyimages.com/photos/digital-security-concept-picture-id1289956604?s=612x612);
+}
+
+
+.bg-image-3 {
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://media.istockphoto.com/photos/cybersecurity-and-secure-nerwork-concept-data-protection-gdrp-glowing-picture-id1197780051?k=20&m=1197780051&s=612x612&w=0&h=hUVHAXTr1RsEq7sWyDkXGPQzhwg3bUcJDgWKh-d0Qp4=);
+}
