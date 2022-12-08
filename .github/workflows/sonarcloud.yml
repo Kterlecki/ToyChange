@@ -47,8 +47,6 @@ jobs:
           dotnet test --collect:"XPlat Code Coverage" --settings test/runsettings.xml
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           
-          codeDir="$(find ./test/TestResults/** -type d -maxdepth 1)"
-          rm -rf "$codeDir"
           
           
           
