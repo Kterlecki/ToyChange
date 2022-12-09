@@ -98,6 +98,7 @@ namespace ToyChange.Controllers
 
             if (charge.Status == "succeeded")
             {
+                HttpContext.Session.Remove("Cart");
                 return View("Success");
             }
             else
