@@ -50,6 +50,7 @@ jobs:
       - name: Deploy to Azure Web App
         env:
           STRIPE_TOKEN: ${{ secrets.STRIPE_SECRET_KEY }}
+          AZURE_DB_TOKEN: ${{ secrets.AZURE_DB_PASS }}
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
