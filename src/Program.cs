@@ -7,9 +7,10 @@ using ToyChange.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseInMemoryDatabase(databaseName: "MyInMemoryDatabase"));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Identity user and role 
@@ -24,8 +25,6 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.IsEssential = true;
 });
-
-
 
 builder.Services.AddControllersWithViews();
 
