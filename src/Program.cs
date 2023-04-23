@@ -44,12 +44,6 @@ else
 
 //StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
-
-
-
-
-
-
 app.UseSession();
 app.UseHttpsRedirection();
 

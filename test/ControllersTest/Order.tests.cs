@@ -33,16 +33,12 @@ namespace ToyChange.Tests.ControllersTest
                             OrderDate = DateTime.Now,
                             Id = "1",
                             ItemId = 1,
-
                         });
                     databaseContext.SaveChanges();
                 }
-
             }
             return databaseContext;
         }
-        
-
 
         [Fact]
         public async Task OrderIndex_Index_ReturnsAViewResult()
@@ -54,14 +50,10 @@ namespace ToyChange.Tests.ControllersTest
 
             var result = await controller.Index();
 
-
             //Assert
             Assert.NotNull(result);
             Assert.IsAssignableFrom<ViewResult>(result);
-
-
         }
-
 
         [Fact]
         public void Create_Order_ReturnSuccess()
@@ -73,13 +65,9 @@ namespace ToyChange.Tests.ControllersTest
 
             var result = controller.Create();
 
-
             //Assert
             Assert.NotNull(result);
             Assert.IsAssignableFrom<ViewResult>(result);
-
-
-
         }
 
         [Fact]
@@ -99,13 +87,10 @@ namespace ToyChange.Tests.ControllersTest
 
             var result = await controller.Create(order);
 
-
             //Assert
             Assert.NotNull(result);
             Assert.Equal(10, order.OrderId);
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
-
-
         }
 
         [Fact]
@@ -118,13 +103,9 @@ namespace ToyChange.Tests.ControllersTest
 
             var result = await controller.Details(100);
 
-
             //Assert
             Assert.NotNull(result);
             Assert.IsAssignableFrom<NotFoundResult>(result);
-
-
-
         }
 
         //[Fact]
@@ -171,7 +152,6 @@ namespace ToyChange.Tests.ControllersTest
 
             var edit = await controller.Edit(10);
 
-
             //Assert
             Assert.NotNull(edit);
             Assert.IsAssignableFrom<ViewResult>(edit);
@@ -194,7 +174,6 @@ namespace ToyChange.Tests.ControllersTest
             var result = await controller.Create(order);
 
             var edit = await controller.Edit(10, order);
-
 
             //Assert
             Assert.NotNull(edit);
@@ -232,7 +211,6 @@ namespace ToyChange.Tests.ControllersTest
 
             var result = await controller.Create(order);
             var delete = await controller.DeleteConfirmed(10);
-
 
             //Assert
             Assert.NotNull(delete);

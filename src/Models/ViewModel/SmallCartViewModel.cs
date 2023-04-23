@@ -4,6 +4,5 @@
     {
         public int NoOfItems { get; set; }
         public decimal TotalAmount { get; set; }
-
     }
 }

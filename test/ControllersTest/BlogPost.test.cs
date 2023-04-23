@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -8,12 +7,10 @@ using ToyChange.Controllers;
 using ToyChange.Data;
 using Xunit;
 
-
 namespace ToyChange.Tests.ControllersTest
 {
     public class BlogPostTests
     {
-
         private static ApplicationDbContext GetDbContext()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
@@ -33,17 +30,12 @@ namespace ToyChange.Tests.ControllersTest
                             BlogTitle = "Test Item Title",
                             BlogContent = "Test Item Description",
                             BlogImageUrl = "https://upload.wikimedia.org/wikipedia/en/9/95/Test_image.jpg"
-
                         });
                     databaseContext.SaveChanges();
                 }
-
             }
             return databaseContext;
         }
-        
-
-
         [Fact]
         public async Task Index_Create_ReturnsAViewResult()
         {
@@ -54,14 +46,10 @@ namespace ToyChange.Tests.ControllersTest
 
             var result = await controller.Index();
 
-
             //Assert
             Assert.NotNull(result);
             Assert.IsAssignableFrom<ViewResult>(result);
-
-
         }
-
 
         [Fact]
         public void Create_BlogPost_ReturnSuccess()
@@ -73,13 +61,9 @@ namespace ToyChange.Tests.ControllersTest
 
             var result = controller.Create();
 
-
             //Assert
             Assert.NotNull(result);
             Assert.IsAssignableFrom<ViewResult>(result);
-
-
-
         }
 
         [Fact]
@@ -99,15 +83,11 @@ namespace ToyChange.Tests.ControllersTest
 
             var result = await controller.Create(blogPost);
 
-      
-
             //Assert
             Assert.NotNull(result);
 
             Assert.Equal(10, blogPost.BlogId);
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
-
-
         }
 
         [Fact]
@@ -120,13 +100,9 @@ namespace ToyChange.Tests.ControllersTest
 
             var result = await controller.Details(100);
 
-
             //Assert
             Assert.NotNull(result);
             Assert.IsAssignableFrom<NotFoundResult>(result);
-
-
-
         }
 
         [Fact]
@@ -146,7 +122,6 @@ namespace ToyChange.Tests.ControllersTest
             var result = await controller.Create(blogPost);
 
             var details = await controller.Details(10);
-
 
             //Assert
             Assert.NotNull(details);
@@ -171,7 +146,6 @@ namespace ToyChange.Tests.ControllersTest
 
             var edit = await controller.Edit(10);
 
-
             //Assert
             Assert.NotNull(edit);
             Assert.IsAssignableFrom<ViewResult>(edit);
@@ -193,7 +167,6 @@ namespace ToyChange.Tests.ControllersTest
             var result = await controller.Create(blogPost);
 
             var edit = await controller.Edit(10, blogPost);
-
 
             //Assert
             Assert.NotNull(edit);
@@ -218,7 +191,6 @@ namespace ToyChange.Tests.ControllersTest
 
             var delete = await controller.Delete(10);
 
-
             //Assert
             Assert.NotNull(delete);
             Assert.IsAssignableFrom<ViewResult>(delete);
@@ -242,12 +214,9 @@ namespace ToyChange.Tests.ControllersTest
 
             var delete = await controller.DeleteConfirmed(10);
 
-
             //Assert
             Assert.NotNull(delete);
             Assert.IsAssignableFrom<RedirectToActionResult>(delete);
         }
-
-
     }
 }

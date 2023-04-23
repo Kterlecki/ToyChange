@@ -1,11 +1,8 @@
 
 using Microsoft.AspNetCore.Mvc;
-
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ToyChange.Controllers;
 using ToyChange.Data;
@@ -38,21 +35,16 @@ namespace ToyChange.Tests.ControllersTest
                         Price = 100,
                         ItemCategory = ItemCategory.Technic,
                         ImageUrl = "https://upload.wikimedia.org/wikipedia/en/9/95/Test_image.jpg"
-
                     });
                     databaseContext.SaveChanges();
                 }
-
             }
             return databaseContext;
         }
 
-
-
         [Fact]
         public async Task CartAdd_Cart_ReturnsNotNull()
-        { 
-
+        {
             //Act
             var item = new Item()
             {
@@ -72,13 +64,9 @@ namespace ToyChange.Tests.ControllersTest
 
             var cartResult = cartController.Add(10);
 
-
-
             //Assert
             Assert.NotNull(cartResult);
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
-
-
         }
 
         [Fact]
@@ -86,23 +74,19 @@ namespace ToyChange.Tests.ControllersTest
         {
             ////Act
 
-
             //var mockDb = GetDbContext();
 
             //var cartController = new CartController(mockDb);
 
             ////Arrange
 
-
             //var cartResult = await cartController.Add(50);
-
 
             ////var result = Task.FromResult<TaskStatus>(status);
             ////Assert
             ////Assert.Null(cartResult);
             ////Assert.Equal(cartResult, TaskStatus.Faulted);
             //Assert.IsType<InvalidOperationException>(cartResult);
-
 
         }
 
@@ -128,23 +112,11 @@ namespace ToyChange.Tests.ControllersTest
             var createItem =controller.Create(item);
 
             var cartAdd = cartController.Add(10);
-            var cartRemove =  cartController.Remove(10);    
-
-
-
+            var cartRemove =  cartController.Remove(10);
 
             //Assert
             Assert.NotNull(cartRemove);
             Assert.IsAssignableFrom<Task<IActionResult>>(cartRemove);
-
-
         }
-
-
-
-
     }
-
-   
 }
-

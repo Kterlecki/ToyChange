@@ -48,15 +48,10 @@ namespace ToyChange.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
-        
-
         public async Task<IActionResult> Remove(int id)
         {
-
             List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
             cart.RemoveAll(x => x.ProductId == id);
-
-
 
             if (cart.Count == 0)
             {
@@ -71,9 +66,6 @@ namespace ToyChange.Controllers
 
             return RedirectToAction("Index");
         }
-
-        
-
         [HttpPost]
         public async Task<IActionResult> Create(string stripeToken, [FromRoute]long id)
         {
@@ -81,18 +73,14 @@ namespace ToyChange.Controllers
             CartItem cartItem = cart.FirstOrDefault(c => c.ProductId == id);
 
             var chargeOptions = new ChargeCreateOptions() {
-
                 Amount = ((long)cartItem.Price * 100),
                 Currency = "usd",
                 Source = stripeToken,
                 Metadata = new Dictionary<string, string>() {
                     {"ProductId", cartItem.ProductId.ToString()},
                     {"ProductName", cartItem.ProductName}
-
                 }
             };
-
-            
             var service = new ChargeService();
             Charge charge = service.Create(chargeOptions);
 
@@ -105,11 +93,6 @@ namespace ToyChange.Controllers
             {
                 return View("Failure");
             }
-
-            //Order order = new Order();
-            //OrdersController ordersController = new OrdersController( order);
-
-
         }
     }
 }

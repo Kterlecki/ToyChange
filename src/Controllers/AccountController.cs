@@ -12,19 +12,18 @@ namespace ToyChange.Controllers
 
         public AccountController(UserManager<IdentityUser> _userManager, SignInManager<IdentityUser> _signInManager)
         {
-            this.userManager = _userManager;
-            this.signInManager = _signInManager;
+            userManager = _userManager;
+            signInManager = _signInManager;
         }
         public IActionResult Index()
         {
             return View();
         }
 
-
         [HttpGet]
         public IActionResult Login(string _returnUrl = null)
         {
-            LoginVM loginVM = new LoginVM();
+            var loginVM = new LoginVM();
             loginVM.ReturnUrl = _returnUrl ?? Url.Content("~/"); // If returnURL is null return the base URL
 
             return View(loginVM);
@@ -46,13 +45,9 @@ namespace ToyChange.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-
             }
             return View(loginVM);
         }
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -68,7 +63,6 @@ namespace ToyChange.Controllers
             registerVM.ReturnUrl = _returnUrl;
             return View(registerVM);
         }
-
 
         [HttpPost]
         public async Task<ActionResult> Register(RegisterVM _registerVM, string? _returnUrl = null)
@@ -95,10 +89,8 @@ namespace ToyChange.Controllers
                 }
 
                 ModelState.AddModelError("Password", "Password entered Doesn't meet criteria, User Not created");
-
             }
             return View(_registerVM);
         }
-
     }
 }

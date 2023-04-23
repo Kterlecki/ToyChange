@@ -19,7 +19,6 @@ namespace ToyChange.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
         }
 
         public DbSet<User> User { get; set; }
