@@ -1,4 +1,6 @@
 
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using ToyChange.Data;
 using ToyChange.Models;
 
@@ -12,10 +14,19 @@ public class Seed
     {
         _dataContext = dataContext;
     }
-    public void SeedDataContext()
+    public async void SeedDataContext(string passwordSecret)
     {
         if(!_dataContext.Item.Any())
         {
+            var user = new User()
+            {
+                Email = "123@gmail.com",
+                UserName = "John123",
+                PasswordHash = "abc"
+            };
+            var password = passwordSecret;
+            var userManager = _dataContext.GetService<UserManager<IdentityUser>>();
+            await userManager.CreateAsync(user, password);
             var items = new List<Item>()
             {
                 new Item{
@@ -43,7 +54,15 @@ public class Seed
                     Order = new Order{OrderDate = DateTime.Now}
                 }
             };
+            var order = new Order()
+            {
+                OrderDate = DateTime.Now,
+                Item = items[0],
+                User = user
+            };
+            //_dataContext.User.Add(user);
             _dataContext.Item.AddRange(items);
+            _dataContext.Order.Add(order);
             _dataContext.SaveChanges();
         }
     }

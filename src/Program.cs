@@ -19,7 +19,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -30,6 +30,8 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddControllersWithViews();
 
+var userOne = builder.Configuration["UserPasswords:UserOne"] ?? args[0];
+
 var app = builder.Build();
 SeedData(app);
 void SeedData(IHost app)
@@ -39,7 +41,7 @@ void SeedData(IHost app)
     using ( var scope = scopedFactory.CreateScope())
     {
         var service = scope.ServiceProvider.GetService<Seed>();
-        service.SeedDataContext();
+        service.SeedDataContext(userOne);
     }
 }
 
