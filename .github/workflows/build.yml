@@ -42,6 +42,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Kterlecki_ToyChange" /o:"kterlecki" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=" D:/a/ToyChange/ToyChange/test/TestResults/**/coverage.opencover.xml"
-          dotnet build
+          dotnet build ${{ secrets.USER_ONE_PASSWORD }}
           dotnet test --collect:"XPlat Code Coverage" --settings test/runsettings.xml
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

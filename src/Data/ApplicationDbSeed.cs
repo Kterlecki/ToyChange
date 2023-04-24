@@ -25,20 +25,15 @@
         //            context.BlogPost.Add(new BlogPost { BlogId = 0, BlogTitle = "Test Blog", BlogContent = "Test Content", BlogImageUrl = "https://upload.wikimedia.org/wikipedia/en/9/95/Test_image.jpg" });
         //        }
 
-
-
         //        if (context.Order.FirstOrDefault() == null)
         //        {
         //            context.Order.Add(new Order { OrderId= 0, OrderDate = DateTime.Now, Id="0", ItemId = 0});
         //        }
 
-
-
         //        context.SaveChanges();
 
         //    }
         //}
-
 
     }
 }

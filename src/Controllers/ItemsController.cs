@@ -9,13 +9,11 @@ namespace ToyChange.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-
         public ItemsController(ApplicationDbContext context)
         {
             _context = context;
             _context.Database.EnsureCreated();
         }
-
 
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
@@ -48,21 +46,6 @@ namespace ToyChange.Controllers
             }
             return View(await items.AsNoTracking().ToListAsync());
         }
-
-
-
-        // GET: Products
-        //public ActionResult CartView()
-        //{
-        //    return View(cart);
-        //}
-
-        // GET: Items
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Item.ToListAsync());
-        //}
-
         // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
         {

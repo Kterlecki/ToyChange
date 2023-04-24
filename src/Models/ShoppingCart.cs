@@ -2,7 +2,6 @@
 {
     public class ShoppingCart
     {
-
         private List<Item> items;
 
         public ShoppingCart()
@@ -12,29 +11,20 @@
 
         public void AddItem(Item item)
         {
-            Item i = items.FirstOrDefault(p => p.ItemId.Equals(item.ItemId));
+            var i = items.FirstOrDefault(p => p.ItemId.Equals(item.ItemId));
             if (i != null)
             {
-                Item item_cart = new Item() {
+                var item_cart = new Item() {
                     ItemId = item.ItemId,
                     Title = item.Title,
                     Description = item.Description,
                     Price = item.Price,
                     ImageUrl = item.ImageUrl,
                     ItemCategory = item.ItemCategory,
-                    Order = item.Order,
-                    
+                    Order = item.Order
                 };
                 items.Add(item_cart);
             }
-            
-                
-                
         }
-
-
-       
-
-
     }
 }

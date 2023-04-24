@@ -10,8 +10,6 @@ using ToyChange.Data.Enums;
 using ToyChange.Models;
 using Xunit;
 
-
-
 namespace ToyChange.Tests;
 
 public class ItemTests
@@ -21,7 +19,6 @@ public class ItemTests
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
-        
         var databaseContext = new ApplicationDbContext(options);
         databaseContext.Database.EnsureCreated();
         if (databaseContext.Item.Count() < 0)
@@ -37,11 +34,9 @@ public class ItemTests
                         Price = 100,
                         ItemCategory = ItemCategory.Technic,
                         ImageUrl = "https://upload.wikimedia.org/wikipedia/en/9/95/Test_image.jpg"
-
                     });
                 databaseContext.SaveChanges();
             }
-
         }
         return databaseContext;
     }
@@ -50,7 +45,6 @@ public class ItemTests
     //    var db = GetDbContext();
     //    if (db.Item.Count() < 0)
     //    {
-            
     //            db.Item.Add(
     //                new Item()
     //                {
@@ -88,11 +82,7 @@ public class ItemTests
     //        db.Item.AddRange(item);
     //        db.SaveChanges();
 
-
-
     //    }
-
-    
     [Fact]
     public async Task ItemIndex_Create_ReturnsAViewResult()
     {
@@ -103,14 +93,10 @@ public class ItemTests
 
         var result = await  controller.Index("","");
 
-
         //Assert
         Assert.NotNull(result);
         Assert.IsAssignableFrom<ViewResult>(result);
-
-
     }
-
 
     [Fact]
     public void Create_Item_ReturnSuccess()
@@ -119,16 +105,10 @@ public class ItemTests
         var mockDb = GetDbContext();
         var controller = new ItemsController(mockDb);
         //Act
-        
         var result =  controller.Create();
-
-
         //Assert
         Assert.NotNull(result);
         Assert.IsAssignableFrom<ViewResult>(result);
-
-
-
     }
 
     [Fact]
@@ -150,15 +130,11 @@ public class ItemTests
 
         var result = await controller.Create(item);
 
-
         //Assert
         Assert.NotNull(result);
-        
         Assert.Equal(10, item.ItemId);
         Assert.Equal(100, item.Price);
         Assert.IsAssignableFrom<RedirectToActionResult>(result);
-
-
     }
 
     [Fact]
@@ -170,14 +146,9 @@ public class ItemTests
         //Act
 
         var result = await controller.Details(100);
-
-
         //Assert
         Assert.NotNull(result);
         Assert.IsAssignableFrom<NotFoundResult>(result);
-
-
-
     }
 
     [Fact]
@@ -199,7 +170,6 @@ public class ItemTests
         var result = await controller.Create(item);
 
         var details = await controller.Details(10);
-
 
         //Assert
         Assert.NotNull(details);
@@ -226,7 +196,6 @@ public class ItemTests
 
         var edit = await controller.Edit(10);
 
-
         //Assert
         Assert.NotNull(edit);
         Assert.IsAssignableFrom<ViewResult>(edit);
@@ -250,7 +219,6 @@ public class ItemTests
         var result = await controller.Create(item);
 
         var edit = await controller.Edit(10,item);
-
 
         //Assert
         Assert.NotNull(edit);
@@ -277,7 +245,6 @@ public class ItemTests
 
         var delete = await controller.Delete(10);
 
-
         //Assert
         Assert.NotNull(delete);
         Assert.IsAssignableFrom<ViewResult>(delete);
@@ -303,7 +270,6 @@ public class ItemTests
 
         var delete = await controller.DeleteConfirmed(10);
 
-
         //Assert
         Assert.NotNull(delete);
         Assert.IsAssignableFrom<RedirectToActionResult>(delete);
@@ -318,11 +284,8 @@ public class ItemTests
         //Act
         var delete = await controller.Delete(200);
 
-
         //Assert
         Assert.NotNull(delete);
         Assert.IsAssignableFrom<NotFoundResult>(delete);
     }
-
-
 }

@@ -13,7 +13,6 @@ namespace ToyChange.Tests.ControllersTest
     [TestFixture]
     public class Account
     {
-
         [Test]
         public void LoginView_abc_ResponseSuccess()
         {
@@ -22,11 +21,8 @@ namespace ToyChange.Tests.ControllersTest
 
             //var controller = new AccountController(userManager.Object, signInManager.Object);
 
-
             //var result = controller.Login(It.IsAny<string>() );
             //Assert.IsNotNull(result);
-
-
 
         }
     }

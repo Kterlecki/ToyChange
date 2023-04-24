@@ -2,21 +2,24 @@ using System.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
+using ToyChange;
 using ToyChange.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddTransient<Seed>();
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseInMemoryDatabase(databaseName: "MyInMemoryDatabase"));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Identity user and role 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -25,11 +28,22 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-
-
 builder.Services.AddControllersWithViews();
 
+var userOne = builder.Configuration["UserPasswords:UserOne"] ?? args[0];
+
 var app = builder.Build();
+SeedData(app);
+void SeedData(IHost app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+    using ( var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<Seed>();
+        service.SeedDataContext(userOne);
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -44,12 +58,6 @@ else
 }
 
 //StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
-
-
-
-
-
-
 
 app.UseSession();
 app.UseHttpsRedirection();
