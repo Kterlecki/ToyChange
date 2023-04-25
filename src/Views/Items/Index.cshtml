@@ -72,6 +72,7 @@
             </td>
             <td>
             <a class = "btn btn-primary" asp-controller= "Cart" asp-action="Add" asp-route-id= "@item.ItemId">Add to cart</a>
+           
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -86,6 +87,21 @@
 
             </td>
         </tr>
+}
+ @if (TempData["Success"] != null)
+{
+    <div class="alert alert-success" id="notification">
+        @TempData["Success"]
+    </div>
+    @* <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $("#notification").fadeOut("slow", function() {
+                    $(this).remove();
+                });
+            }, 3000); // 3 seconds
+        });
+    </script> *@
 }
     </tbody>
 </table>
