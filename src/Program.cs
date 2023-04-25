@@ -30,7 +30,8 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddControllersWithViews();
 
-var userOne = builder.Configuration["UserPasswords:UserOne"] ?? args[0];
+var userOnePassword = builder.Configuration["UserPasswords:UserOne"] ?? args[0];
+var userTwoPassword = builder.Configuration["UserPasswords:UserTwo"] ?? args[0];
 
 var app = builder.Build();
 SeedData(app);
@@ -41,7 +42,7 @@ void SeedData(IHost app)
     using ( var scope = scopedFactory.CreateScope())
     {
         var service = scope.ServiceProvider.GetService<Seed>();
-        service.SeedDataContext(userOne);
+        service.SeedDataContext(userOnePassword, userTwoPassword);
     }
 }
 
