@@ -28,6 +28,13 @@ namespace ToyChange.Controllers
 
             return View(cartVM);
         }
+        public IActionResult GetCartCount()
+        {
+            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
+            var count = cart.Count;
+            ViewBag.CartCount = count;
+            return Content(count.ToString());
+        }
         public async Task<IActionResult> Add(int id)
         {
             Item item = await _context.Item.FindAsync(id);
