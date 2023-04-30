@@ -41,7 +41,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="BlogPosts" asp-action="Index">BlogPosts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark fas fa-shopping-cart " asp-area="" asp-controller="Cart" asp-action="Index"></a>
+                            <a class="nav-link text-dark fas fa-shopping-cart position-relative" asp-area="" asp-controller="Cart" asp-action="Index"></a>
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">@ViewBag.CartCount</span>
                         </li>
 
 
@@ -90,3 +91,18 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+<script>
+    $(function() {
+        // Make an AJAX request to get the number of items in the cart
+        $.ajax({
+            url: '@Url.Action("GetCartCount", "Cart")',
+            type: 'GET',
+            success: function(count) {
+                // Update the cart count
+                $('#cart-count').text(count);
+            }
+        });
+    });
+</script>

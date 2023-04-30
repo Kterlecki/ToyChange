@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ToyChange.Models.Item>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -87,9 +88,20 @@
             </td>
         </tr>
 }
+ @if (TempData["Success"] != null)
+{
+    <div class="alert alert-success" id="notification">
+        @TempData["Success"]
+    </div>
+}
+<script>
+    // Hide the notification after 5 seconds (5000 milliseconds)
+    setTimeout(function() {
+        $('#notification').fadeOut('slow');
+    }, 3000);
+</script>
     </tbody>
 </table>
-
 
 
 
